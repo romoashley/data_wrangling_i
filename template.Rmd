@@ -86,7 +86,41 @@ skimr::skim(litters_df)
 ```
 
 
+## Options in `read_*`
 
 
+```{r}
+#read_csv by default read the first row as the variable names. If you want to change that, you can use the skip = # of the rows you want to skip. For example, skip = 10. Whatever data happens to be in the 11th row, thats what R thinks the variable names are. You canuse col_names = FALSE to allow R to create new names instead of using the data from that row as variables.
+
+litters_df =
+  read_csv(
+    "data/FAS_litters.csv",
+    skip = 10, col_names = FALSE)
+```
+
+Look at NA values. 
+
+```{r}
+#If you a numeric value in your dataset should be treated as missing, you can use na = c("NA", # you want treated as missing). You can include muliple things you want treated as missing. For example: na = c("NA", 19, ".", "missing").
+
+litters_df =
+  read_csv(
+    "data/FAS_litters.csv",
+    na = c("NA", 19))
+```
+
+Column types
+
+```{r}
+#when using read_csv on your dataframe, it gives you chr and dbl when you run the dataframe i the console. chr means the variable values are characters and dbl means the variable values are numeric. You can tell R what variables are.
+
+litters_df =
+  read_csv(
+    "data/FAS_litters.csv",
+    col_types = 
+      cols(
+       `GD0 weight` = col_character()
+      ))
+```
 
 

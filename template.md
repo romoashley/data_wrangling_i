@@ -234,3 +234,57 @@ Data summary
 | pups_born_alive |         0 |          1.00 |  7.35 | 1.76 |  3.0 |  6.00 |  8.00 |  8.00 | 11.0 | ▁▃▂▇▁ |
 | pups_dead_birth |         0 |          1.00 |  0.33 | 0.75 |  0.0 |  0.00 |  0.00 |  0.00 |  4.0 | ▇▂▁▁▁ |
 | pups_survive    |         0 |          1.00 |  6.41 | 2.05 |  1.0 |  5.00 |  7.00 |  8.00 |  9.0 | ▁▃▂▇▇ |
+
+## Options in `read_*`
+
+``` r
+#read_csv by default read the first row as the variable names. If you want to change that, you can use the skip = # of the rows you want to skip. For example, skip = 10. Whatever data happens to be in the 11th row, thats what R thinks the variable names are. You canuse col_names = FALSE to allow R to create new names instead of using the data from that row as variables.
+
+litters_df =
+  read_csv(
+    "data/FAS_litters.csv",
+    skip = 10, col_names = FALSE)
+```
+
+    ## Rows: 40 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): X1, X2
+    ## dbl (6): X3, X4, X5, X6, X7, X8
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+Look at NA values.
+
+``` r
+#If you a numeric value in your dataset should be treated as missing, you can use na = c("NA", # you want treated as missing). You can include muliple things you want treated as missing. For example: na = c("NA", 19, ".", "missing").
+
+litters_df =
+  read_csv(
+    "data/FAS_litters.csv",
+    na = c("NA", 19))
+```
+
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): Group, Litter Number
+    ## dbl (6): GD0 weight, GD18 weight, GD of Birth, Pups born alive, Pups dead @ ...
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+Column types
+
+``` r
+#when using read_csv on your dataframe, it gives you chr and dbl when you run the dataframe i the console. chr means the variable values are characters and dbl means the variable values are numeric. You can tell R what variables are.
+
+litters_df =
+  read_csv(
+    "data/FAS_litters.csv",
+    col_types = 
+      cols(
+       `GD0 weight` = col_character()
+      ))
+```
