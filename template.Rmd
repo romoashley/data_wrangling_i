@@ -12,21 +12,81 @@ library(tidyverse)
 ```{r} 
 #load data in a dataframe by using read_csv("datafile pathname"). This requires tidyverse to be loaded first.The pathname is within the project you are under. 
 
-litters_df = read_csv("data/FAS_litters.csv") 
+litters_df = 
+  read_csv("data/FAS_litters.csv") 
 #change variable names to snake case 
 #janitor::clean_names(dataframe) replaces that dataframe with an updated version with snake case variable names (upper case converted to lowercase, spaces converted to underscores, special characters get removed). The code janitor::clean_names(dataframe) says inside the janitor package, use the functon clean_names. 
 
-litters_df = janitor::clean_names(litters_df) 
+litters_df = 
+  janitor::clean_names(litters_df) 
 # note: janitor is a package in R that has many functions. You can load the entire package like you did with tideverse. It would look like this: library(janitor). 
 ``` 
 
 Import the same dataset using an absolute path. 
 
 ```{r} 
-litters_df_abs = read_csv("/Users/ashleyromo/Desktop/P8105/data_wrangling_i/data/FAS_litters.csv") 
+litters_df_abs = 
+  read_csv("/Users/ashleyromo/Desktop/P8105/data_wrangling_i/data/FAS_litters.csv") 
 
-litters_df = janitor::clean_names(litters_df) 
+litters_df = 
+  janitor::clean_names(litters_df) 
 
 #if you move the location of the fodler with the data, the absolute path no longer works, which why it is always better to use relative paths.
 ```
+
+Learning Assessment
+```{r}
+#relative
+
+pups_df = 
+  read_csv("data/FAS_pups.csv")
+
+pups_df = 
+  janitor::clean_names(pups_df)
+
+#absolute
+
+pups_df_abs = 
+  read_csv("/Users/ashleyromo/Desktop/P8105/data_wrangling_i/data/FAS_pups.csv")
+
+  
+```
+
+## Look at data
+
+```{r}
+#print the first 10 rows
+litters_df
+
+#head loads the first 6 rows
+head(litters_df)
+
+#tail loads the bottom rows
+tail(litters_df)
+```
+
+To look at the entire dataset, you can use `view` 
+
+```{r, eval = FALSE}
+#note: eval = FALSE so we do not include it in the R markdown file
+
+# the view function pulls up a separate window to look at the entire dataset
+view(litters_df)
+```
+
+
+Look at a data summary
+
+```{r}
+#str looks at the structure of the dataframe
+str(litters_df)
+
+#skimr::skim tel;s you missing values and info about each variable as well as a histogram for numerical variables
+skimr::skim(litters_df)
+```
+
+
+
+
+
 
