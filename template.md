@@ -21,6 +21,11 @@ library(tidyverse)
     ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 
 ``` r
+library(readxl)
+library(haven)
+```
+
+``` r
 #load data in a dataframe by using read_csv("datafile pathname"). This requires tidyverse to be loaded first.The pathname is within the project you are under. 
 
 litters_df = 
@@ -287,4 +292,25 @@ litters_df =
       cols(
        `GD0 weight` = col_character()
       ))
+```
+
+## Other file tupes
+
+Import a xlsx file first.
+
+``` r
+#First, need to load readxl package through library(readxl) 
+#read_excel behaves similar to read_csv. You can do you col_types, skip rows, etc
+
+mlb_df = 
+  read_excel("data/mlb11.xlsx")
+```
+
+Import a SAS file
+
+``` r
+#first load the haven package through library(haven)
+
+pulse_df = 
+  read_sas("data/public_pulse_data.sas7bdat")
 ```
