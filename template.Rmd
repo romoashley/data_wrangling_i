@@ -147,3 +147,33 @@ pulse_df =
 ```
 
 
+## Base Rr ...
+
+```{r, eval = FALSE}
+# We are encouraeged not to code using read.csv. It is better to use read_csv.
+litters_df = 
+  read.csv("data/FAS_litters.csv")
+
+# do not use the $
+litters_df$Gr
+```
+
+don't do this
+
+
+## Export data
+
+We have code that "cleans" data and need to export the results
+
+```{r}
+litters_df_cleaned = 
+  read_csv("data/FAS_litters.csv")
+
+litters_df_cleaned =
+  janitor::clean_names(litters_df_cleaned)
+
+# To export data, use write_csv(dataframe you want to export, "path and file name of the new csv file you are creating")
+write_csv(litters_df_cleaned, "data/litters_cleaned.csv")
+```
+
+ 

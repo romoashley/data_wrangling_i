@@ -314,3 +314,42 @@ Import a SAS file
 pulse_df = 
   read_sas("data/public_pulse_data.sas7bdat")
 ```
+
+## Base Rr …
+
+``` r
+# We are encouraeged not to code using read.csv. It is better to use read_csv.
+litters_df = 
+  read.csv("data/FAS_litters.csv")
+
+# do not use the $
+litters_df$Gr
+```
+
+don’t do this
+
+## Export data
+
+We have code that “cleans” data and need to export the results
+
+``` r
+litters_df_cleaned = 
+  read_csv("data/FAS_litters.csv")
+```
+
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): Group, Litter Number
+    ## dbl (6): GD0 weight, GD18 weight, GD of Birth, Pups born alive, Pups dead @ ...
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+litters_df_cleaned =
+  janitor::clean_names(litters_df_cleaned)
+
+# To export data, use write_csv(dataframe you want to export, "path and file name of the new csv file you are creating")
+write_csv(litters_df_cleaned, "data/litters_cleaned.csv")
+```
