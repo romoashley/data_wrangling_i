@@ -77,3 +77,34 @@ select(litters_df, group)
 pull(litters_df, group)
 ```
 
+
+## `filter`
+
+get rid of rows using `filter`
+
+```{r}
+# filter keeps everything where variable == "" is TRUE. Example: group == "Con7" alone will output True/False. filter(litters_df, group == "Con7") keeps only the rows where groups == "Con7 is True.
+filter(litters_df, group == "Con7")
+
+# not equals to is !=
+filter(litters_df, group != "Con7")
+
+# keeps rows where gd0weight greater than 20
+filter(litters_df, gd0_weight > 20)
+
+# keeps rows where gd0weight less than or equal 20
+filter(litters_df, gd0_weight <= 20)
+
+# If you want to keep two thing, you can use group =="first thing" | group == "second thing" where | means or. 
+filter(litters_df, group == "Con7" | group == "Con8")
+
+# If you want to keep two thing, you can also use %in% that allows you to list what you want to keep
+filter(litters_df, group %in% c("Con7", "Con8"))
+
+# If you want to keep everything where it is not true that group == "Con7
+filter(litters_df, !(group == "Con7"))
+
+# You can condition on muliiple thngs
+filter(litters_df, group %in% c("Con7", "Con8"), gd0_weight > 20)
+```
+
