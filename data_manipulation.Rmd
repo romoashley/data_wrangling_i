@@ -1,0 +1,9 @@
+---
+title: "Data Manipulation"
+author: "ASHLEY ROMO"
+date: "2023-09-24"
+output: github_document
+---
+```{r} 
+library(tidyverse) 
+```
