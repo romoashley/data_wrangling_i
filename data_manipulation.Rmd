@@ -138,3 +138,18 @@ mutate(
   group = str_to_lower(group)
 )
 ```
+
+## `arrange`
+
+```{r}
+#arrange puts things in order of the variable you specify
+arrange(litters_df, gd0_weight)
+
+# you can arrange by one variable and then another variable
+arrange(litters_df, group, gd0_weight)
+
+```
+
+
+
+
