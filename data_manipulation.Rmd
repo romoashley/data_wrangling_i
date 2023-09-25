@@ -7,3 +7,73 @@ output: github_document
 ```{r} 
 library(tidyverse) 
 ```
+
+Import FAS litters and pups.
+
+```{r}
+litters_df =
+  read_csv("data/FAS_litters.csv")
+litters_df = janitor::clean_names(litters_df)
+
+pups_df =
+  read_csv("data/FAS_pups.csv")
+pups_df = janitor::clean_names(pups_df)
+```
+
+## `select'
+
+`select` is used to select columns!
+
+```{r}
+#select allows you to select columns. First, you specificy the dataframe. Then, you list the variables you want to select/keep. The order you list the variables is the order they will be organized in your dataframe. This is a good way to reorder variables.
+select(litters_df, group, litter_number, gd0_weight)
+
+select(litters_df, gd0_weight, group)
+
+#using : allows you to select a range of varibles 
+select(litters_df, group, gd0_weight:gd_of_birth)
+
+# using starts_with("") allows you to select all the variables that start with the word you specify
+select(litters_df, group, starts_with("pups"))
+
+# using - allows you to delete the variable that comes after the -. 
+select(litters_df, -litter_number)
+
+# using - and starts_with allows you to delete all the variables that start with name you specify
+select(litters_df, -starts_with("gd"))
+
+# To rename a variable, you do new_name = old_name
+select(litters_df, group, litter_id = litter_number)
+
+# Including everything() allows you to keep all the variables you have not mentioned 
+select(litters_df, group, litter_id = litter_number, everything())
+
+# everything() is helpful when you just need to rearrange the order of the variables. For example, if you want to make gd0_weight the first column. 
+select(litters_df,  gd0_weight, everything())
+```
+
+
+```{r}
+# rename allows you to rename a variable and keep everything else
+rename(litters_df, litter_id = litter_number)
+
+#relocate allows you specify which variable you want to be listed first
+relocate(litters_df, litter_number)
+```
+
+## Learning Assessment
+
+```{r}
+select(pups_df, litter_number, sex, pd_ears)
+```
+
+
+`select` vs `pull`
+```{r}
+# Select allows you to put.a dataframe in and a dataframe out. It does not care that there is only one column there. It is ALWAYS going to give you a dataframe. 
+select(litters_df, group)
+
+# Pull extracts a column from your dataframe and now it is just a vector floating around. It does not exist inside a datafame anymore.   
+pull(litters_df, group)
+```
+
