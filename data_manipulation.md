@@ -638,7 +638,7 @@ arrange(litters_df, gd0_weight)
     ## # ℹ 2 more variables: pups_dead_birth <dbl>, pups_survive <dbl>
 
 ``` r
-# you can arrange by one variable and then another variable
+# you can arrange by one variable
 arrange(litters_df, group, gd0_weight)
 ```
 
@@ -657,3 +657,30 @@ arrange(litters_df, group, gd0_weight)
     ## 10 Con8  #3/83/3-3             NA          NA            20               9
     ## # ℹ 39 more rows
     ## # ℹ 2 more variables: pups_dead_birth <dbl>, pups_survive <dbl>
+
+## pipes
+
+``` r
+#pipes can be used by %>%  or |>
+# |>  can be obtained using "shift + command + M"
+#when using |> , you do not need to specify the dataframe!
+litters_df = 
+  read_csv("data/FAS_litters.csv") |> 
+  janitor::clean_names() |> 
+  select(-starts_with("pups")) |> 
+  mutate(
+    group = str_to_lower(group),
+    wt_gain = gd18_weight - gd0_weight,
+  ) |> 
+  drop_na(wt_gain) |> 
+  arrange(group, wt_gain)
+```
+
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): Group, Litter Number
+    ## dbl (6): GD0 weight, GD18 weight, GD of Birth, Pups born alive, Pups dead @ ...
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
